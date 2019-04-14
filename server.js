@@ -46,6 +46,12 @@ function getProxyClient(target) {
 
 function auth(req, resp) {
   let target = req.query.target
+  if(typeof target === 'undefined'){
+    resp.end(JSON.stringify({
+      status: 'failed',
+      message: 'need target params'
+    }))
+  }
   let {
     proxy
   } = getProxyClient(target)
@@ -94,5 +100,5 @@ app.get('/redirect', redirectHandler)
 
 const listenHost = mode === 'development' ? 'localhost' : '0.0.0.0'
 app.listen(port, listenHost, undefined, () => {
-  console.log(`server listen o ${listenHost}:${port}`)
+  console.log(`server listen on ${listenHost}:${port}`)
 })

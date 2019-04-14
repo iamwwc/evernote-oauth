@@ -1,0 +1,34 @@
+$active-color: #20a0ff;
+$inactive-color: rgb(66, 233, 80);
+
+@mixin color-group($color) {
+  background-color: $color;
+  border-color: $color;
+}
+
+.switcher {
+  position: relative;
+  height: 30px;
+  width: 63px;
+  border-radius: 20px;
+  @include color-group($inactive-color);
+
+  .switcher-core {
+    position: absolute;
+    height: 27px;
+    width: 27px;
+    border-radius: 20px;
+    background-color: #fff;
+    transform: translate(2px, 2px);
+    transition: transform cubic-bezier(1, 1, 1, 1) 0.2s;
+  }
+}
+
+.active .switcher-core {
+  transform: translate(35px, 2px);
+  transition: transform cubic-bezier(1, 1, 1, 1) 0.2s;
+}
+
+.active .switcher {
+  @include color-group($active-color);
+}
